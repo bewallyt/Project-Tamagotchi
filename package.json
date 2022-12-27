@@ -7,7 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "start-dev": "expo start --dev-client"
+    "start-dev": "expo start --dev-client",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@types/react": "~18.0.24",
@@ -38,8 +39,7 @@
   "prettier": {
     "singleQuote": true,
     "printWidth": 120,
-    "trailingComma": "es5",
-    "arrowParens": "avoid"
+    "trailingComma": "es5"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": "prettier --write",
