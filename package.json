@@ -8,6 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "start-dev": "expo start --dev-client",
+    "start-dev-clean": "expo start -c --dev-client",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -24,6 +25,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "@typescript-eslint/parser": "^5.47.1",
     "eslint": "^8.30.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
@@ -45,5 +48,8 @@
     "*.{ts,tsx,js,jsx}": "prettier --write",
     "*.js": "eslint --cache --fix"
   },
-  "private": true
+  "private": true,
+  "repository": "https://github.com/bewallyt/Project-Tamagotchi.git",
+  "author": "Benson Wally Tran <bewallyt@gmail.com>",
+  "license": "MIT"
 }
