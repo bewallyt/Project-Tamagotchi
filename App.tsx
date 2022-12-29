@@ -1,19 +1,25 @@
-import React, { useEffect } from 'react';
-import 'expo-dev-client';
-
-import { StatusBar } from 'expo-status-bar';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { permissions } from './src/health';
+import 'expo-dev-client';
+import { StatusBar } from 'expo-status-bar';
+
+import { HealthValue } from 'react-native-health';
+
+import { permissions } from 'health';
+import { usePromiseMemo } from 'hooks';
 
 export default function App() {
-  useEffect(() => {
-    console.log('mountinggggggg');
-    permissions.testHealthKit();
-  }, []);
+  const { results, loading } = usePromiseMemo<{ heartRateSamples: HealthValue[]; stepCountSample: HealthValue }>(
+    permissions.testHealthKitAsync,
+    []
+  );
+  if (loading) {
+    return <Text>Fetching Data....</Text>;
+  }
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app! - Benson Wally Tran</Text>
+      <Text>{JSON.stringify(results)}</Text>
       <StatusBar style="auto" />
     </View>
   );

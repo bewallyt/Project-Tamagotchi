@@ -1,4 +1,5 @@
 import AppleHealthKit, { HealthValue, HealthKitPermissions } from 'react-native-health';
+import { promisify } from 'utils';
 
 /* Permission options */
 const permissions = {
@@ -8,26 +9,35 @@ const permissions = {
   },
 } as HealthKitPermissions;
 
-function testHealthKit() {
-  console.log('----- invoking testHealthKit -----');
-  AppleHealthKit.initHealthKit(permissions, (error: string) => {
-    /* Called after we receive a response from the system */
+async function testHealthKitAsync(): Promise<{ heartRateSamples: HealthValue[]; stepCountSample: HealthValue }> {
+  console.log('----- [TEST] invoking testHealthKit -----');
+  await initHealthKitAsync(permissions);
+  const options = {
+    startDate: new Date(2020, 1, 1).toISOString(),
+  };
+  const getHeartRateSamplesAsync = promisify<HealthValue[]>(AppleHealthKit.getHeartRateSamples);
+  const getStepCountAsync = promisify<HealthValue>(AppleHealthKit.getStepCount);
 
-    if (error) {
-      console.log('[ERROR] Cannot grant permissions!');
-    }
+  const heartRateSamples = await getHeartRateSamplesAsync(options);
+  const stepCountSample = await getStepCountAsync(options);
 
-    /* Can now read or write to HealthKit */
-
-    const options = {
-      startDate: new Date(2020, 1, 1).toISOString(),
-    };
-
-    AppleHealthKit.getHeartRateSamples(options, (callbackError: string, results: HealthValue[]) => {
-      /* Samples are now collected from HealthKit */
-      console.log('RESULTS', results);
-    });
-  });
+  return {
+    heartRateSamples,
+    stepCountSample,
+  };
 }
 
-export default { testHealthKit };
+async function initHealthKitAsync(permissions: HealthKitPermissions): Promise<HealthValue> {
+  const initAsync = promisify<HealthValue>(AppleHealthKit.initHealthKit);
+  let result: HealthValue;
+  try {
+    result = await initAsync(permissions);
+    console.log('[SUCCESS] Granted permissions!', result);
+  } catch (e) {
+    console.log('[ERROR] Cannot grant permissions!');
+    throw new Error(e);
+  }
+  return result;
+}
+
+export default { testHealthKitAsync };

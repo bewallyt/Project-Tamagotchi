@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 const paths = {
   health: './src/health',
+  utils: './src/utils',
+  hooks: './src/hooks',
 };
 
 module.exports = function (api) {

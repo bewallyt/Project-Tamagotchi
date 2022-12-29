@@ -8,7 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "start-dev": "expo start --dev-client",
-    "start-dev-clean": "expo start -c --dev-client",
+    "start-dev-clear": "expo start -c --dev-client",
     "prepare": "husky install"
   },
   "dependencies": {
