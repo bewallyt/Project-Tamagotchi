@@ -17,6 +17,7 @@ export default function App() {
   if (loading) {
     return <Text>Fetching Data....</Text>;
   }
+  console.log(results);
   return (
     <View style={styles.container}>
       <Text>{JSON.stringify(results)}</Text>

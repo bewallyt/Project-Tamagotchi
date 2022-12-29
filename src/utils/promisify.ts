@@ -6,6 +6,7 @@ export default function promisify<T>(func: (...args) => void): (...args: unknown
     return new Promise((resolve, reject) => {
       function callback(error: any, result: T): void {
         if (error) {
+          console.log('[ERROR] - Promisfy error:', error);
           reject(error);
           return;
         }
