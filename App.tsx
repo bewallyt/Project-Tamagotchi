@@ -5,22 +5,35 @@ import 'expo-dev-client';
 import { StatusBar } from 'expo-status-bar';
 
 import { HealthValue } from 'react-native-health';
+import { format } from 'date-fns';
 
-import { permissions } from 'health';
+import { permissions, PERMISSIONS, getWeeklyStepCountsAsync } from 'health';
 import { usePromiseMemo } from 'hooks';
 
 export default function App() {
-  const { results, loading } = usePromiseMemo<{ heartRateSamples: HealthValue[]; stepCountSample: HealthValue }>(
-    permissions.testHealthKitAsync,
-    []
-  );
+  const { results, loading } = usePromiseMemo<HealthValue[]>(async () => {
+    await permissions.initHealthKitAsync(PERMISSIONS);
+    return getWeeklyStepCountsAsync();
+  }, []);
+
   if (loading) {
     return <Text>Fetching Data....</Text>;
   }
+
   console.log(results);
   return (
     <View style={styles.container}>
-      <Text>{JSON.stringify(results)}</Text>
+      {results.map(({ startDate, value }: HealthValue, i) => {
+        return (
+          <View key={i} style={styles.textContainer}>
+            <View style={styles.textContentContainer}>
+              <Text>{`Date: ${format(new Date(startDate), 'MMM do')}`}</Text>
+              <Text>{`Steps: ${Math.floor(value)}`}</Text>
+            </View>
+          </View>
+        );
+      })}
+      <Text>{`Average Daily Steps: ${Math.floor(results.reduce((acc, { value }) => acc + value, 0) / 7)}`}</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -30,7 +43,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center',
+    padding: 16,
+  },
+  textContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    width: '100%',
+    marginBottom: 16,
+  },
+  textContentContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    marginTop: 8,
+    marginBottom: 8,
+    width: '100%',
   },
 });

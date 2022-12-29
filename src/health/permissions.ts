@@ -1,10 +1,9 @@
 import AppleHealthKit, { HealthValue, HealthKitPermissions } from 'react-native-health';
-import { format, subMinutes } from 'date-fns';
 
 import { promisify } from 'utils';
 
 /* Permission options */
-const permissions = {
+export const PERMISSIONS = {
   permissions: {
     read: [
       AppleHealthKit.Constants.Permissions.HeartRate,
@@ -16,26 +15,6 @@ const permissions = {
     write: [],
   },
 } as HealthKitPermissions;
-
-async function testHealthKitAsync(): Promise<{ heartRateSamples: HealthValue[]; stepCountSamples: HealthValue[] }> {
-  console.log('----- [TEST] invoking testHealthKit -----');
-  await initHealthKitAsync(permissions);
-
-  const getHeartRateSamplesAsync = promisify<HealthValue[]>(AppleHealthKit.getHeartRateSamples);
-  const getDailyStepCountAsync = promisify<HealthValue[]>(AppleHealthKit.getDailyStepCountSamples);
-
-  const heartRateSamples = await getHeartRateSamplesAsync({
-    startDate: format(subMinutes(new Date(), 5), 'YYYY-MM-DDTHH:mm:ss.SSSZ'),
-  });
-  const stepCountSamples = await getDailyStepCountAsync({
-    startDate: new Date(new Date().toDateString()).toISOString(),
-  });
-
-  return {
-    heartRateSamples,
-    stepCountSamples,
-  };
-}
 
 async function initHealthKitAsync(permissions: HealthKitPermissions): Promise<HealthValue> {
   const initAsync = promisify<HealthValue>(AppleHealthKit.initHealthKit);
@@ -50,4 +29,4 @@ async function initHealthKitAsync(permissions: HealthKitPermissions): Promise<He
   return result;
 }
 
-export default { testHealthKitAsync };
+export default { initHealthKitAsync };

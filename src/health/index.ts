@@ -1,3 +1,4 @@
-import permissions from './permissions';
+import permissions, { PERMISSIONS } from './permissions';
+import { getWeeklyStepCountsAsync } from './steps';
 
-export { permissions };
+export { permissions, PERMISSIONS, getWeeklyStepCountsAsync };
