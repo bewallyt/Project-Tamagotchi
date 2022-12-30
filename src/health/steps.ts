@@ -1,13 +1,13 @@
 import AppleHealthKit, { HealthValue } from 'react-native-health';
-import { subDays } from 'date-fns';
 
 import { promisify } from 'utils';
+import { ONE_WEEK_AGO_ISO } from 'utils/date-helpers';
 
 async function getWeeklyStepCountsAsync(): Promise<HealthValue[]> {
   const getDailyStepCountAsync = promisify<HealthValue[]>(AppleHealthKit.getDailyStepCountSamples);
   return getDailyStepCountAsync({
     period: 60 * 24,
-    startDate: new Date(subDays(new Date(), 6).toDateString()).toISOString(),
+    startDate: ONE_WEEK_AGO_ISO,
   });
 }
 

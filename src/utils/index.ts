@@ -1,4 +1,4 @@
 import promisify from './promisify';
-import dependenciesMatch from './dependenciesMatch';
+import dependenciesMatch from './dependencies-match';
 
 export { promisify, dependenciesMatch };

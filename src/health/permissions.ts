@@ -11,6 +11,8 @@ export const PERMISSIONS = {
       AppleHealthKit.Constants.Permissions.Height,
       AppleHealthKit.Constants.Permissions.Weight,
       AppleHealthKit.Constants.Permissions.SleepAnalysis,
+      AppleHealthKit.Constants.Permissions.Workout,
+      AppleHealthKit.Constants.Permissions.ActivitySummary,
     ],
     write: [],
   },
@@ -23,7 +25,7 @@ async function initHealthKitAsync(permissions: HealthKitPermissions): Promise<He
     result = await initAsync(permissions);
     console.log('[SUCCESS] Granted permissions!');
   } catch (e) {
-    console.log('[ERROR] Cannot grant permissions!');
+    console.log('[ERROR] Cannot grant permissions!', e);
     throw new Error(e);
   }
   return result;
