@@ -1,37 +1,35 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
-import { StatusBar } from 'expo-status-bar';
-
 import { HealthValue } from 'react-native-health';
 import { format } from 'date-fns';
+import { StatusBar } from 'expo-status-bar';
+
+import { RenderWithLoadingView } from 'ui/common';
 
 import { getWeeklyStepCountsAsync } from 'health';
 import { usePromiseMemo } from 'hooks';
 
 export default function StepView() {
   const { results, loading } = usePromiseMemo<HealthValue[]>(() => getWeeklyStepCountsAsync(), []);
-
-  if (loading) {
-    return <Text>Fetching Data....</Text>;
-  }
-
-  console.log(results);
+  console.log('-----Step View------', { results, loading });
   return (
-    <View style={styles.container}>
-      {results.map(({ startDate, value }: HealthValue, i) => {
-        return (
-          <View key={i} style={styles.textContainer}>
-            <View style={styles.textContentContainer}>
-              <Text>{`Date: ${format(new Date(startDate), 'MMM do')}`}</Text>
-              <Text>{`Steps: ${Math.floor(value)}`}</Text>
+    <RenderWithLoadingView isLoading={loading}>
+      <View style={styles.container}>
+        {results?.map(({ startDate, value }: HealthValue, i) => {
+          console.log({ startDate, value });
+          return (
+            <View key={i} style={styles.textContainer}>
+              <View style={styles.textContentContainer}>
+                <Text>{`Date: ${format(new Date(startDate), 'MMM do')}`}</Text>
+                <Text>{`Steps: ${Math.floor(value)}`}</Text>
+              </View>
             </View>
-          </View>
-        );
-      })}
-      <Text>{`Average Daily Steps: ${Math.floor(results.reduce((acc, { value }) => acc + value, 0) / 7)}`}</Text>
-      <StatusBar style="auto" />
-    </View>
+          );
+        })}
+        <Text>{`Average Daily Steps: ${Math.floor(results?.reduce((acc, { value }) => acc + value, 0) / 7)}`}</Text>
+        <StatusBar style="auto" />
+      </View>
+    </RenderWithLoadingView>
   );
 }
 

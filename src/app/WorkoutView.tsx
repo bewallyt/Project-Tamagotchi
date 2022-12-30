@@ -1,44 +1,48 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-
 import { HealthValue } from 'react-native-health';
+
+import { RenderWithLoadingView } from 'ui/common';
 
 import { getWorkoutsAsync } from 'health';
 import { usePromiseMemo } from 'hooks';
 
-export default function StepView() {
+export default function WorkoutView() {
   const { results, loading } = usePromiseMemo<HealthValue[]>(() => getWorkoutsAsync(), []);
-
-  if (loading) {
-    return <Text>Fetching Data....</Text>;
-  }
-
-  console.log(results);
+  console.log('-----Workout View------', { results, loading });
   return (
-    <View style={styles.container}>
-      {results.map((hv: HealthValue, i) => {
-        return (
-          <View key={i} style={styles.textContainer}>
-            <View style={styles.textContentContainer}>
-              <Text>{JSON.stringify(hv)}</Text>
-            </View>
-          </View>
-        );
-      })}
-      <StatusBar style="auto" />
-    </View>
+    <RenderWithLoadingView isLoading={false}>
+      <ScrollView contentContainerStyle={styles.scrollView} scrollEnabled>
+        {results?.length > 0 ? (
+          results.map((hv: HealthValue, i) => {
+            console.log(hv);
+            return (
+              <View key={i} style={styles.textContainer}>
+                <View style={styles.textContentContainer}>
+                  <Text>{JSON.stringify(hv)}</Text>
+                </View>
+              </View>
+            );
+          })
+        ) : (
+          <Text>No Workouts</Text>
+        )}
+        <StatusBar style="auto" />
+      </ScrollView>
+    </RenderWithLoadingView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  scrollView: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'flex-start',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     padding: 16,
+    display: 'flex',
+    height: '100%',
   },
   textContainer: {
     display: 'flex',
