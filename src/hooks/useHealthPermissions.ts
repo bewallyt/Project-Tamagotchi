@@ -10,6 +10,7 @@ export interface IHealthAuth {
   error: unknown;
 }
 
+// TODO(Benson): Refactor this - move into permissions.ts?
 const useHealthPermissions = (): IHealthAuth => {
   const {
     results,
