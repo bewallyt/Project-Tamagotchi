@@ -3,7 +3,6 @@ For cb, assumes node style arguments (err, res).
 TODO(Benson): How to type arguments?
 */
 export default function promisify<T>(func: (...args) => void): (...args: unknown[]) => Promise<T> {
-  console.log(func);
   return function <T>(...args): Promise<T> {
     return new Promise((resolve, reject) => {
       function callback(error: unknown, result: T): void {

@@ -1,6 +1,6 @@
 import AppleHealthKit, { HealthInputOptions, HealthValue } from 'react-native-health';
 
-import { promisify } from 'utils';
+import { promisify } from 'utils/promise';
 import { ONE_WEEK_AGO_ISO } from 'utils/date-helpers';
 
 const DEFAULT_OPTIONS = {

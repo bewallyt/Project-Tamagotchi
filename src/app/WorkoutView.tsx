@@ -6,7 +6,7 @@ import { HealthValue } from 'react-native-health';
 import { RenderWithLoadingView } from 'ui/common';
 
 import { getWorkoutsAsync } from 'health';
-import { usePromiseMemo } from 'hooks';
+import { usePromiseMemo } from 'utils/promise';
 
 export default function WorkoutView() {
   const { results, loading } = usePromiseMemo<HealthValue[]>(() => getWorkoutsAsync(), []);

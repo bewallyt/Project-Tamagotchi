@@ -1,6 +1,6 @@
 import AppleHealthKit, { HealthValue, HealthKitPermissions } from 'react-native-health';
 
-import { promisify } from 'utils';
+import { promisify } from 'utils/promise';
 
 /* Permission options */
 export const PERMISSIONS = {
