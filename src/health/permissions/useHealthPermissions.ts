@@ -1,8 +1,8 @@
 import { HealthValue } from 'react-native-health';
 
-import { PERMISSIONS, permissions } from 'health';
+import permissions, { PERMISSIONS } from './permissions';
 
-import usePromiseMemo from './usePromiseMemo';
+import usePromiseMemo from '../../hooks/usePromiseMemo';
 
 export interface IHealthAuth {
   isAuthorized: boolean;
