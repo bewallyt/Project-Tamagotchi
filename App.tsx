@@ -7,10 +7,10 @@ import theme from 'ui/theme';
 import { RenderWithLoadingView } from 'ui/common';
 
 import { WorkoutView, StepView, TestThreeView } from 'app';
-import { useHealthPermissions } from 'health';
+import { usePermissions } from 'health';
 
 export default function App() {
-  const { authorizing, error, isAuthorized } = useHealthPermissions();
+  const { authorizing, error, isAuthorized } = usePermissions();
   const [index, setIndex] = React.useState(0);
   return (
     <ThemeProvider theme={theme}>

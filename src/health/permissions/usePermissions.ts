@@ -11,7 +11,7 @@ export interface IHealthAuth {
 }
 
 // TODO(Benson): Refactor this - move into permissions.ts?
-const useHealthPermissions = (): IHealthAuth => {
+const usePermissions = (): IHealthAuth => {
   const {
     results,
     loading: authorizing,
@@ -20,4 +20,4 @@ const useHealthPermissions = (): IHealthAuth => {
   return { isAuthorized: !!results, authorizing, error };
 };
 
-export default useHealthPermissions;
+export default usePermissions;

@@ -1,5 +1,5 @@
-import { PERMISSIONS, permissions, useHealthPermissions } from './permissions';
+import { PERMISSIONS, permissions, usePermissions } from './permissions';
 import { getWeeklyStepCountsAsync } from './steps';
 import { getWorkoutsAsync } from './workouts';
 
-export { permissions, useHealthPermissions, PERMISSIONS, getWeeklyStepCountsAsync, getWorkoutsAsync };
+export { permissions, usePermissions, PERMISSIONS, getWeeklyStepCountsAsync, getWorkoutsAsync };

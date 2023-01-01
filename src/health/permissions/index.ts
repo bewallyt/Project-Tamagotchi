@@ -1,4 +1,4 @@
 import permissions, { PERMISSIONS } from './permissions';
-import useHealthPermissions from './useHealthPermissions';
+import usePermissions from './usePermissions';
 
-export { permissions, useHealthPermissions, PERMISSIONS };
+export { permissions, usePermissions, PERMISSIONS };
