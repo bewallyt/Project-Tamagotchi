@@ -14,6 +14,7 @@
     "build-ios-sim": "eas build --profile development-simulator --platform ios"
   },
   "dependencies": {
+    "@expo/metro-config": "^0.5.2",
     "@react-three/drei": "^9.48.6",
     "@react-three/fiber": "^8.9.2",
     "@rneui/base": "^4.0.0-rc.7",

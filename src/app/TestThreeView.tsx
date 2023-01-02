@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber/native';
 
-function Box(props) {
+export function Box(props) {
   // This reference will give us direct access to the mesh
   const mesh = useRef();
 

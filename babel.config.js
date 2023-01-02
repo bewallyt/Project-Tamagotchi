@@ -5,6 +5,7 @@ const paths = {
   hooks: './src/hooks',
   app: './src/app',
   ui: './src/ui',
+  models: './src/models',
 };
 
 module.exports = function (api) {
