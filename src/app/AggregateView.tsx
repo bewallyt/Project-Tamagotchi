@@ -15,7 +15,7 @@ import {
 import { usePromiseMemo } from 'utils/promise';
 import { BEGINNING_OF_WEEK_ISO } from 'utils/dateHelpers';
 
-export default function WorkoutView() {
+export default function AggregateView() {
   const { results, loading } = usePromiseMemo<{
     [WorkoutType.CARDIO]: number;
     [WorkoutType.STRENGTH]: number;
