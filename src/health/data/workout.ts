@@ -4,7 +4,7 @@ import { differenceInMinutes } from 'date-fns';
 import { promisify } from 'utils/promise';
 import { ONE_WEEK_AGO_ISO } from 'utils/dateHelpers';
 
-import { WorkoutType, activityToType } from './activityTypes';
+import { WorkoutType, activityToType } from '../activityTypes';
 
 const DEFAULT_OPTIONS = {
   startDate: ONE_WEEK_AGO_ISO,

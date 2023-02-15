@@ -1,7 +1,7 @@
 import { PERMISSIONS, permissions, usePermissions } from './permissions';
-import { getStepCountSamplesAsync, getTotalStepCount } from './steps';
-import { getWorkoutsAsync, getWorkoutMinutes } from './workouts';
-import { getSleepSamplesAsync, getTotalSleepTime } from './sleep';
+import { getStepCountSamplesAsync, getTotalStepCount } from './data/step';
+import { getWorkoutsAsync, getWorkoutMinutes } from './data/workout';
+import { getSleepSamplesAsync, getTotalSleepTime } from './data/sleep';
 import { Activity, WorkoutType, getActivityName, activityToType } from './activityTypes';
 
 export {

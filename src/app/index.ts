@@ -1,6 +1,4 @@
-import StepView from './example/StepView';
-import WorkoutView from './example/WorkoutView';
 import TestThreeView from './example/TestThreeView';
-import AggregateView from './AggregateView';
+import AggregateView from './CurrentWeekProgressView';
 
-export { StepView, WorkoutView, TestThreeView, AggregateView };
+export { TestThreeView, AggregateView };

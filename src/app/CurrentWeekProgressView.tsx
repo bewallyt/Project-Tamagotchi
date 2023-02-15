@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { Text } from 'react-native';
 
 import { RenderWithLoadingView } from 'ui/common';
 
@@ -12,10 +12,16 @@ import {
   getSleepSamplesAsync,
   getTotalSleepTime,
 } from 'health';
+
 import { usePromiseMemo } from 'utils/promise';
 import { BEGINNING_OF_WEEK_ISO } from 'utils/dateHelpers';
 
-export default function AggregateView() {
+/*
+This view is used to depict the current week's progress for steps, strength, sleep, cardio.
+TODO(Benson): Onboarding experience for setting goals.
+*/
+
+export default function CurrentWeekProgressView() {
   const { results, loading } = usePromiseMemo<{
     [WorkoutType.CARDIO]: number;
     [WorkoutType.STRENGTH]: number;
@@ -38,5 +44,3 @@ export default function AggregateView() {
     </RenderWithLoadingView>
   );
 }
-
-const styles = StyleSheet.create({});
