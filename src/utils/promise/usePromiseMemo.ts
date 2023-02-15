@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import dependenciesMatch from 'utils/dependencies-match';
+import dependenciesMatch from 'utils/dependenciesMatch';
 
 const usePromiseMemo = <T, E = unknown>(
   promise: () => Promise<T>,
