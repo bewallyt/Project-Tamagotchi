@@ -6,11 +6,11 @@ import { StatusBar } from 'expo-status-bar';
 
 import { RenderWithLoadingView } from 'ui/common';
 
-import { getWeeklyStepCountsAsync } from 'health';
+import { getStepCountSamplesAsync } from 'health';
 import { usePromiseMemo } from 'utils/promise';
 
 export default function StepView() {
-  const { results, loading } = usePromiseMemo<HealthValue[]>(() => getWeeklyStepCountsAsync(), []);
+  const { results, loading } = usePromiseMemo<HealthValue[]>(() => getStepCountSamplesAsync(), []);
   console.log('-----Step View------', { results, loading });
   return (
     <RenderWithLoadingView isLoading={loading}>
