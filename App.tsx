@@ -6,7 +6,7 @@ import { ThemeProvider } from '@rneui/themed';
 import theme from 'ui/theme';
 import { RenderWithLoadingView } from 'ui/common';
 
-import { AggregateView } from 'app';
+import { CalorieHeatMapView, CurrentWeekProgressView } from 'app';
 import { usePermissions } from 'health';
 
 export default function App() {
@@ -14,7 +14,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <RenderWithLoadingView isLoading={authorizing || !isAuthorized} isError={!!error}>
-        <AggregateView />
+        <CurrentWeekProgressView />
       </RenderWithLoadingView>
     </ThemeProvider>
   );

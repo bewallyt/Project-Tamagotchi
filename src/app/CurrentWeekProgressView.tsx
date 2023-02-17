@@ -1,7 +1,6 @@
 import React from 'react';
-import { Text } from 'react-native';
 
-import { RenderWithLoadingView } from 'ui/common';
+import { RenderWithLoadingView, CircularProgressBar } from 'ui/common';
 
 import {
   getWorkoutsAsync,
@@ -15,6 +14,7 @@ import {
 
 import { usePromiseMemo } from 'utils/promise';
 import { BEGINNING_OF_WEEK_ISO } from 'utils/dateHelpers';
+import { Donut } from 'ui/common/graph';
 
 /*
 This view is used to depict the current week's progress for steps, strength, sleep, cardio.
@@ -40,7 +40,7 @@ export default function CurrentWeekProgressView() {
   console.log('---- aggregate view ----', results);
   return (
     <RenderWithLoadingView isLoading={loading}>
-      <Text>{JSON.stringify(results)}</Text>
+      <Donut />
     </RenderWithLoadingView>
   );
 }

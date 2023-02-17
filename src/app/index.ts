@@ -1,4 +1,4 @@
-import TestThreeView from './example/TestThreeView';
-import AggregateView from './CurrentWeekProgressView';
+import CurrentWeekProgressView from './CurrentWeekProgressView';
+import CalorieHeatMapView from './CalorieHeatMapView';
 
-export { TestThreeView, AggregateView };
+export { CalorieHeatMapView, CurrentWeekProgressView };
