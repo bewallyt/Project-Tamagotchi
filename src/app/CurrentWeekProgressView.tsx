@@ -1,6 +1,7 @@
 import React from 'react';
+import { View, StyleSheet } from 'react-native';
 
-import { RenderWithLoadingView, CircularProgressBar } from 'ui/common';
+import { RenderWithLoadingView, Donut } from 'ui/common';
 
 import {
   getWorkoutsAsync,
@@ -14,7 +15,6 @@ import {
 
 import { usePromiseMemo } from 'utils/promise';
 import { BEGINNING_OF_WEEK_ISO } from 'utils/dateHelpers';
-import { Donut } from 'ui/common/graph';
 
 /*
 This view is used to depict the current week's progress for steps, strength, sleep, cardio.
@@ -38,9 +38,45 @@ export default function CurrentWeekProgressView() {
     };
   }, []);
   console.log('---- aggregate view ----', results);
+  /*
+  TODO(Benson): 
+  - Make donuts list items? Or have them floating over animation rendering 
+  - Make donuts clickable? Make them smaller?
+  - Add icon within the donut.
+  - View for previous weeks?
+  - TLDR will need a new place to put dense information.
+  */
   return (
     <RenderWithLoadingView isLoading={loading}>
-      <Donut />
+      <View style={styles.container}>
+        <View style={styles.donutContainer}>
+          <Donut color="lightblue" />
+        </View>
+        <View style={styles.donutContainer}>
+          <Donut color="lightcoral" />
+        </View>
+        <View style={styles.donutContainer}>
+          <Donut color="mediumspringgreen" />
+        </View>
+        <View style={styles.donutContainer}>
+          <Donut color="dimgrey" />
+        </View>
+      </View>
     </RenderWithLoadingView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
+    padding: 16,
+    marginTop: 48,
+  },
+  donutContainer: {
+    marginTop: 8,
+    marginBottom: 8,
+  },
+});
